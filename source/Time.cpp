@@ -9,6 +9,12 @@ Time::Time(std::uint32_t time)
 
 }
 
+Time::Time(hh_mm_ss time)
+    : time_{time}
+{
+
+}
+
 Time::Time(std::string_view time)
     : time_{createFromString(time)}
 {

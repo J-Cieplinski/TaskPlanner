@@ -55,8 +55,10 @@ target_include_directories(
 
 target_sources(${PROJECT_NAME}
   PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Date.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/include/Time.hpp
   PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/source/Date.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/source/Time.cpp
 )
 
