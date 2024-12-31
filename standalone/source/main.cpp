@@ -1,9 +1,19 @@
+#include <Entry.hpp>
+
 #include <cxxopts.hpp>
 #include <iostream>
 #include <string>
 #include <unordered_map>
 
-auto main() -> int {
+int main()
+{
+    planner::Entry entry{
+        .name = "TEST",
+        .dueDate = planner::Date{"2024-12-01"},
+        .duration = planner::Time("23"),
+        .priority = planner::Priority::HIGH,
+    };
 
-  return 0;
+    std::cout << entry;
+    return 0;
 }

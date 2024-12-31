@@ -9,10 +9,10 @@ namespace planner
 
 TEST(Time, StringConstructorShouldProperlyCreateTime)
 {
-    const std::string CREATED_STR {"01:23:25"};
-    constexpr std::uint32_t EXPECTED_HOURS {1};
-    constexpr std::uint32_t EXPECTED_MINUTES {23};
-    constexpr std::uint32_t EXPECTED_SECONDS {25};
+    const std::string CREATED_STR{"01:23:25"};
+    constexpr std::uint32_t EXPECTED_HOURS{1};
+    constexpr std::uint32_t EXPECTED_MINUTES{23};
+    constexpr std::uint32_t EXPECTED_SECONDS{25};
 
     Time time{CREATED_STR};
 
@@ -23,8 +23,8 @@ TEST(Time, StringConstructorShouldProperlyCreateTime)
 
 TEST(Time, IntConstructorShouldProperlyCreateTime)
 {
-    const std::string EXPECTED_STRING {"01:23:25"};
-    constexpr std::uint32_t CREATED_SECONDS {5005};
+    const std::string EXPECTED_STRING{"01:23:25"};
+    constexpr std::uint32_t CREATED_SECONDS{5005};
 
     Time time{CREATED_SECONDS};
 
@@ -34,7 +34,4 @@ TEST(Time, IntConstructorShouldProperlyCreateTime)
     EXPECT_EQ(ss.str(), EXPECTED_STRING);
 }
 
-} // namespace planner
-
-
-
+}  // namespace planner

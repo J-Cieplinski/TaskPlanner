@@ -7,10 +7,10 @@ namespace planner
 
 Date::Date(std::string_view date)
 {
-    std::string dateStr {date};
+    std::string dateStr{date};
     std::stringstream ss(dateStr);
-    
-    if(not std::chrono::from_stream(ss, "%F", date_))
+
+    if (not std::chrono::from_stream(ss, "%F", date_))
     {
         throw std::runtime_error(dateStr + " is not a valid date format");
     }

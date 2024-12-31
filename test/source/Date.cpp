@@ -9,10 +9,10 @@ namespace planner
 
 TEST(Date, StringConstructorShouldProperlyCreateDate)
 {
-    const std::string CREATED_STR {"2024-06-15"};
-    constexpr std::uint32_t EXPECTED_YEARS {2024};
-    constexpr std::uint32_t EXPECTED_MONTHS {6};
-    constexpr std::uint32_t EXPECTED_DAYS {15};
+    const std::string CREATED_STR{"2024-06-15"};
+    constexpr std::uint32_t EXPECTED_YEARS{2024};
+    constexpr std::uint32_t EXPECTED_MONTHS{6};
+    constexpr std::uint32_t EXPECTED_DAYS{15};
 
     Date date{CREATED_STR};
 
@@ -23,12 +23,9 @@ TEST(Date, StringConstructorShouldProperlyCreateDate)
 
 TEST(Date, StringConstructorShouldThrowOnIncorrectDate)
 {
-    const std::string CREATED_STR {"2024-06"};
+    const std::string CREATED_STR{"2024-06"};
 
     EXPECT_THROW(Date{CREATED_STR}, std::runtime_error);
 }
 
-} // namespace planner
-
-
-
+}  // namespace planner
