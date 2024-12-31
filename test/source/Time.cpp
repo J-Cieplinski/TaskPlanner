@@ -4,7 +4,7 @@
 
 #include <gtest/gtest.h>
 
-namespace planner::time
+namespace planner
 {
 
 TEST(Time, StringConstructorShouldProperlyCreateTime)
@@ -34,7 +34,7 @@ TEST(Time, IntConstructorShouldProperlyCreateTime)
     EXPECT_EQ(ss.str(), EXPECTED_STRING);
 }
 
-} // namespace planner::time
+} // namespace planner
 
 
 

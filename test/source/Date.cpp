@@ -4,7 +4,7 @@
 
 #include <gtest/gtest.h>
 
-namespace planner::date
+namespace planner
 {
 
 TEST(Date, StringConstructorShouldProperlyCreateDate)
@@ -28,7 +28,7 @@ TEST(Date, StringConstructorShouldThrowOnIncorrectDate)
     EXPECT_THROW(Date{CREATED_STR}, std::runtime_error);
 }
 
-} // namespace planner::time
+} // namespace planner
 
 
 

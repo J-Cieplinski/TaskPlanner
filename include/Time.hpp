@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <string>
 
-namespace planner::time
+namespace planner
 {
 
 class Time
@@ -20,11 +20,11 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const Time& time);
 private:
     hh_mm_ss createFromString(std::string_view time) const;
-    std::pair<std::chrono::seconds, std::size_t> extractSecondsFromTimeUnit(const std::string_view str, std::chrono::seconds multiplier) const;
+    std::pair<std::chrono::seconds, std::size_t> extractSecondsFromTimeUnit(std::string_view str, std::chrono::seconds multiplier) const;
 
     hh_mm_ss time_;
 };
 
 std::ostream& operator<<(std::ostream& os, const Time& time);
 
-} // namespace planner::time
+} // namespace planner

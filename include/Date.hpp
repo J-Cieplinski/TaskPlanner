@@ -3,7 +3,7 @@
 #include <chrono>
 #include <string_view>
 
-namespace planner::date
+namespace planner
 {
 
 class Date
@@ -20,4 +20,4 @@ private:
     year_month_day date_;
 };
 
-} // namespace planner::date
+} // namespace planner

@@ -1,6 +1,6 @@
 #include <Time.hpp>
 
-namespace planner::time
+namespace planner
 {
 
 Time::Time(std::uint32_t time)
@@ -53,7 +53,7 @@ Time::hh_mm_ss Time::createFromString(std::string_view time) const
     return Time::hh_mm_ss{std::chrono::seconds{hours + minutes + seconds}};
 }
 
-std::pair<std::chrono::seconds, std::size_t> Time::extractSecondsFromTimeUnit(const std::string_view str, std::chrono::seconds multiplier) const
+std::pair<std::chrono::seconds, std::size_t> Time::extractSecondsFromTimeUnit(std::string_view str, std::chrono::seconds multiplier) const
 {
     auto pos = str.find_first_of(':');
     auto unitStr = pos != str.npos
@@ -71,4 +71,4 @@ std::ostream& operator<<(std::ostream& os, const Time& time)
     return os;
 }
 
-}  // namespace planner::time
+}  // namespace planner

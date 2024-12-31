@@ -2,7 +2,7 @@
 
 #include <sstream>
 
-namespace planner::date
+namespace planner
 {
 
 Date::Date(std::string_view date)
@@ -32,4 +32,4 @@ std::ostream& operator<<(std::ostream& os, const Date& date)
     return os;
 }
 
-}  // namespace planner::date
+}  // namespace planner
