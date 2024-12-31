@@ -1,29 +1,37 @@
-#include <doctest/doctest.h>
 #include <Time.hpp>
-#include <greeter/version.h>
 
 #include <string>
+
+#include <gtest/gtest.h>
 
 namespace planner::time
 {
 
-TEST_CASE("Time")
+TEST(Time, StringConstructorShouldProperlyCreateTime)
 {
-    Time time{"01:23:25"};
+    const std::string CREATED_STR {"01:23:25"};
+    constexpr std::uint32_t EXPECTED_HOURS {1};
+    constexpr std::uint32_t EXPECTED_MINUTES {23};
+    constexpr std::uint32_t EXPECTED_SECONDS {25};
 
-    CHECK_EQ(time.getTime().hours(), std::chrono::hours(1));
-    CHECK_EQ(time.getTime().minutes(), std::chrono::minutes(23));
-    CHECK_EQ(time.getTime().seconds(), std::chrono::seconds(25));
+    Time time{CREATED_STR};
+
+    EXPECT_EQ(time.getTime().hours(), std::chrono::hours(EXPECTED_HOURS));
+    EXPECT_EQ(time.getTime().minutes(), std::chrono::minutes(EXPECTED_MINUTES));
+    EXPECT_EQ(time.getTime().seconds(), std::chrono::seconds(EXPECTED_SECONDS));
 }
 
-TEST_CASE("TimeString")
+TEST(Time, IntConstructorShouldProperlyCreateTime)
 {
-    const std::string expected {"01:23:25"};
-    constexpr std::uint32_t seconds {5005};
-    Time time{seconds};
+    const std::string EXPECTED_STRING {"01:23:25"};
+    constexpr std::uint32_t CREATED_SECONDS {5005};
+
+    Time time{CREATED_SECONDS};
+
     std::stringstream ss;
     ss << time;
-    CHECK_EQ(ss.str(), expected);
+
+    EXPECT_EQ(ss.str(), EXPECTED_STRING);
 }
 
 } // namespace planner::time
