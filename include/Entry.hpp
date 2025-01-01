@@ -19,7 +19,7 @@ enum class Priority
 
 inline std::ostream& operator<<(std::ostream& os, Priority priority)
 {
-    switch(priority)
+    switch (priority)
     {
         case Priority::LOW:
             return os << "LOW";
@@ -32,8 +32,9 @@ inline std::ostream& operator<<(std::ostream& os, Priority priority)
     }
 }
 
-} // namespace planner
+}  // namespace planner
 
+// clang-format off
 template <> struct fmt::formatter<planner::Priority> : ostream_formatter {};
 
 namespace planner
@@ -49,10 +50,12 @@ struct Entry
 
 inline std::ostream& operator<<(std::ostream& os, Entry& entry)
 {
-    std::string output = fmt::format("|{:^20s}|{:^20s}|{:^20s}|{:^20s}|", entry.name, entry.dueDate, entry.duration, entry.priority);
+    std::string output = fmt::format("|{:^20s}|{:^20s}|{:^20s}|{:^20s}|", entry.name, entry.dueDate,
+                                     entry.duration, entry.priority);
     return os << output;
 }
 
-} // namespace planner
+}  // namespace planner
 
+// clang-format off
 template <> struct fmt::formatter<planner::Entry> : ostream_formatter {};

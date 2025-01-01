@@ -33,18 +33,25 @@ CPMAddPackage(
   OPTIONS "FMT_INSTALL YES" # create an installable target
 )
 
+CPMAddPackage(
+  NAME json
+  GITHUB_REPOSITORY nlohmann/json
+  VERSION 3.11.3
+  OPTIONS "JSON_Install ON"
+)
+
 # ---- Create library ----
 
 # Note: for header-only libraries change all PUBLIC flags to INTERFACE and create an interface
 # target: add_library(${PROJECT_NAME} INTERFACE)
-add_library(${PROJECT_NAME} ${headers} ${sources})
+add_library(${PROJECT_NAME})
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 20)
 
 # being a cross-platform target, we enforce standards conformance on MSVC
 target_compile_options(${PROJECT_NAME} PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive->")
 
 # Link dependencies
-target_link_libraries(${PROJECT_NAME} PUBLIC fmt::fmt)
+target_link_libraries(${PROJECT_NAME} PUBLIC fmt::fmt nlohmann_json::nlohmann_json)
 
 target_include_directories(
   ${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
@@ -53,6 +60,7 @@ target_include_directories(
 
 # ---- Add source files ----
 
+# cmake-format: off
 target_sources(${PROJECT_NAME}
   PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include/Date.hpp
@@ -62,6 +70,7 @@ target_sources(${PROJECT_NAME}
     ${CMAKE_CURRENT_SOURCE_DIR}/source/Date.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/source/Time.cpp
 )
+# cmake-format: on
 
 # ---- Create an installable target ----
 # this allows users to install and find the library via `find_package()`.
@@ -79,5 +88,5 @@ packageProject(
   INCLUDE_DESTINATION include/${PROJECT_NAME}-${PROJECT_VERSION}
   VERSION_HEADER "${VERSION_HEADER_LOCATION}"
   COMPATIBILITY SameMajorVersion
-  DEPENDENCIES "fmt 10.2.1"
+  DEPENDENCIES "fmt 10.2.1;nlohmann_json 3.11.3"
 )

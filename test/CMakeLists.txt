@@ -28,12 +28,14 @@ endif()
 
 add_executable(${PROJECT_NAME})
 
+# cmake-format: off
 target_sources(${PROJECT_NAME}
   PUBLIC
   PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/source/Date.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/source/Time.cpp
 )
+# cmake-format: on
 
 target_link_libraries(${PROJECT_NAME} GTest::gtest_main TaskPlanner::TaskPlanner)
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 20)
