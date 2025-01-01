@@ -21,6 +21,13 @@ TEST(Date, StringConstructorShouldProperlyCreateDate)
     EXPECT_EQ(date.getDate().day(), std::chrono::day(EXPECTED_DAYS));
 }
 
+TEST(Date, StringConstructorShouldThrowOnIncorrectDateFormat)
+{
+    const std::string CREATED_STR{"2024-06-32"};
+
+    EXPECT_THROW(Date{CREATED_STR}, std::runtime_error);
+}
+
 TEST(Date, StringConstructorShouldThrowOnIncorrectDate)
 {
     const std::string CREATED_STR{"2024-06"};

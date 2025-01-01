@@ -21,6 +21,20 @@ TEST(Time, StringConstructorShouldProperlyCreateTime)
     EXPECT_EQ(time.getTime().seconds(), std::chrono::seconds(EXPECTED_SECONDS));
 }
 
+TEST(Time, StringConstructorShouldProperlyCreateTimeFromIncorrectInput)
+{
+    const std::string CREATED_STR{"01:61:61"};
+    constexpr std::uint32_t EXPECTED_HOURS{2};
+    constexpr std::uint32_t EXPECTED_MINUTES{2};
+    constexpr std::uint32_t EXPECTED_SECONDS{1};
+
+    Time time{CREATED_STR};
+
+    EXPECT_EQ(time.getTime().hours(), std::chrono::hours(EXPECTED_HOURS));
+    EXPECT_EQ(time.getTime().minutes(), std::chrono::minutes(EXPECTED_MINUTES));
+    EXPECT_EQ(time.getTime().seconds(), std::chrono::seconds(EXPECTED_SECONDS));
+}
+
 TEST(Time, IntConstructorShouldProperlyCreateTime)
 {
     const std::string EXPECTED_STRING{"01:23:25"};
