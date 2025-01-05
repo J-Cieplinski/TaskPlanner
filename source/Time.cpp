@@ -23,6 +23,16 @@ Time::hh_mm_ss Time::getTime() const
     return time_;
 }
 
+bool Time::operator<(const Time& other) const
+{
+    return time_.to_duration() < other.time_.to_duration();
+}
+
+bool Time::operator==(const Time& other) const
+{
+    return time_.to_duration() == other.time_.to_duration();
+}
+
 Time::hh_mm_ss Time::createFromString(std::string_view time) const
 {
     using namespace std::chrono_literals;

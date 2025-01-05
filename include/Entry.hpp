@@ -10,12 +10,17 @@
 namespace planner
 {
 
-enum class Priority
+enum class Priority : std::uint8_t
 {
     LOW,
     NORMAL,
     HIGH
 };
+
+inline bool operator<(Priority left, Priority right)
+{
+    return static_cast<std::uint8_t>(left) > static_cast<std::uint8_t>(right);
+}
 
 inline std::ostream& operator<<(std::ostream& os, Priority priority)
 {
@@ -48,11 +53,16 @@ struct Entry
     Priority priority;
 };
 
-inline std::ostream& operator<<(std::ostream& os, Entry& entry)
+inline bool operator==(const Entry& left, const Entry& right)
 {
-    std::string output = fmt::format("|{:^20s}|{:^20s}|{:^20s}|{:^20s}|", entry.name, entry.dueDate,
+    return std::tie(left.name, left.dueDate, left.duration, left.priority)
+        == std::tie(right.name, right.dueDate, right.duration, right.priority);
+}
+
+inline std::ostream& operator<<(std::ostream& os, const Entry& entry)
+{
+    return os << fmt::format("|{:^20s}|{:^20s}|{:^20s}|{:^20s}|", entry.name, entry.dueDate,
                                      entry.duration, entry.priority);
-    return os << output;
 }
 
 }  // namespace planner

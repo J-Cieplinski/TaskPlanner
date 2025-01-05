@@ -35,4 +35,25 @@ TEST(Date, StringConstructorShouldThrowOnIncorrectDate)
     EXPECT_THROW(Date{CREATED_STR}, std::runtime_error);
 }
 
+TEST(Date, OperatorLessShouldProperlyEvaluate)
+{
+    const std::string FIRST{"2024-06-25"};
+    const std::string SECOND{"2024-06-26"};
+    Date first(FIRST);
+    Date second(SECOND);
+
+    EXPECT_TRUE(first < second);
+    EXPECT_FALSE(second < first);
+}
+
+TEST(Date, OperatorEqualShouldProperlyEvaluate)
+{
+    const std::string FIRST{"2024-06-25"};
+    const std::string SECOND{"2024-06-25"};
+    Date first(FIRST);
+    Date second(SECOND);
+
+    EXPECT_EQ(first, second);
+}
+
 }  // namespace planner

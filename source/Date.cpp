@@ -26,6 +26,16 @@ Date::year_month_day Date::getDate() const
     return date_;
 }
 
+bool Date::operator<(const Date& other) const
+{
+    return date_ < other.date_;
+}
+
+bool Date::operator==(const Date& other) const
+{
+    return date_ == other.date_;
+}
+
 std::ostream& operator<<(std::ostream& os, const Date& date)
 {
     os << date.date_;

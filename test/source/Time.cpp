@@ -48,4 +48,26 @@ TEST(Time, IntConstructorShouldProperlyCreateTime)
     EXPECT_EQ(ss.str(), EXPECTED_STRING);
 }
 
+TEST(Time, OperatorLessShouldProperlyEvaluate)
+{
+    const std::string FIRST{"01:23:24"};
+    const std::string SECOND{"01:23:25"};
+
+    Time first{FIRST};
+    Time second{SECOND};
+
+    EXPECT_TRUE(first < second);
+}
+
+TEST(Time, OperatorEqualShouldProperlyEvaluate)
+{
+    const std::string FIRST{"01:23:25"};
+    const std::string SECOND{"01:23:25"};
+
+    Time first{FIRST};
+    Time second{SECOND};
+
+    EXPECT_EQ(first, second);
+}
+
 }  // namespace planner

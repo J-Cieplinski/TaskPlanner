@@ -22,6 +22,9 @@ public:
 
     friend std::ostream& operator<<(std::ostream& os, const Time& time);
 
+    bool operator<(const Time& other) const;
+    bool operator==(const Time& other) const;
+
 private:
     hh_mm_ss createFromString(std::string_view time) const;
     std::pair<std::chrono::seconds, std::size_t> extractSecondsFromTimeUnit(
