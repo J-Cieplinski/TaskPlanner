@@ -15,4 +15,4 @@ void serialize(std::ostream& stream, const Entry& entry);
 void serialize(std::ostream& stream, std::span<Entry> entry);
 std::vector<Entry> deserialize(std::istream& stream);
 
-} // namespace planner
+}  // namespace planner

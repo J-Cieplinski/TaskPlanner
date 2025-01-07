@@ -19,8 +19,7 @@ struct PodAdapter
     Priority priority;
 };
 
-} // namespace
-
+}  // namespace
 
 void serialize(std::ostream& stream, const Entry& entry)
 {
@@ -38,9 +37,7 @@ void serialize(std::ostream& stream, const Entry& entry)
 
 void serialize(std::ostream& stream, std::span<Entry> entries)
 {
-    std::ranges::for_each(entries, [&stream](const Entry& entry) {
-        serialize(stream, entry);
-    });
+    std::ranges::for_each(entries, [&stream](const Entry& entry) { serialize(stream, entry); });
 }
 
 std::vector<Entry> deserialize(std::istream& stream)
@@ -48,12 +45,13 @@ std::vector<Entry> deserialize(std::istream& stream)
     PodAdapter data;
     std::vector<Entry> entries;
 
-    while(not stream.read(reinterpret_cast<char*>(&data), sizeof(PodAdapter)).eof())
+    while (not stream.read(reinterpret_cast<char*>(&data), sizeof(PodAdapter)).eof())
     {
-        entries.emplace_back(std::string{data.name}, Date{data.y, data.m, data.d}, Time{data.duration}, data.priority);
+        entries.emplace_back(std::string{data.name}, Date{data.y, data.m, data.d},
+                             Time{data.duration}, data.priority);
     }
 
     return entries;
 }
 
-} // namespace planner
+}  // namespace planner
