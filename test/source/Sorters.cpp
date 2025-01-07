@@ -29,12 +29,12 @@ const planner::Entry entry2{
     .priority = planner::Priority::LOW,
 };
 
-} // namespace
+}  // namespace
 
 TEST(SortByField, ShouldProperlySortByDueDate)
 {
-    std::vector entries {entry1, entry2, entry};
-    const std::vector EXPECTED_ENTRIES {entry, entry1, entry2};
+    std::vector entries{entry1, entry2, entry};
+    const std::vector EXPECTED_ENTRIES{entry, entry1, entry2};
 
     SortByField<&Entry::dueDate>(entries);
 
@@ -43,8 +43,8 @@ TEST(SortByField, ShouldProperlySortByDueDate)
 
 TEST(SortByField, ShouldProperlySortByDuration)
 {
-    std::vector entries {entry1, entry2, entry};
-    const std::vector EXPECTED_ENTRIES {entry2, entry1, entry};
+    std::vector entries{entry1, entry2, entry};
+    const std::vector EXPECTED_ENTRIES{entry2, entry1, entry};
 
     SortByField<&Entry::duration>(entries);
 
@@ -53,8 +53,8 @@ TEST(SortByField, ShouldProperlySortByDuration)
 
 TEST(SortByField, ShouldProperlySortByPriority)
 {
-    std::vector entries {entry1, entry2, entry};
-    const std::vector EXPECTED_ENTRIES {entry, entry1, entry2};
+    std::vector entries{entry1, entry2, entry};
+    const std::vector EXPECTED_ENTRIES{entry, entry1, entry2};
 
     SortByField<&Entry::priority>(entries);
 
@@ -63,15 +63,14 @@ TEST(SortByField, ShouldProperlySortByPriority)
 
 TEST(CustomSort, ShouldProperlySortWithCustomSorter)
 {
-    std::vector entries {entry1, entry2, entry};
-    const std::vector EXPECTED_ENTRIES {entry2, entry1, entry};
-    auto pred = [](const Entry& left, const Entry& right) -> bool {
-        return left.duration < right.duration;
-    };
+    std::vector entries{entry1, entry2, entry};
+    const std::vector EXPECTED_ENTRIES{entry2, entry1, entry};
+    auto pred = [](const Entry& left, const Entry& right) -> bool
+    { return left.duration < right.duration; };
 
     CustomSort(entries, pred);
 
     EXPECT_EQ(entries, EXPECTED_ENTRIES);
 }
 
-} // namespace planner
+}  // namespace planner

@@ -1,4 +1,5 @@
 #include <Entry.hpp>
+#include <Serialization.hpp>
 
 namespace planner
 {
@@ -6,7 +7,7 @@ namespace planner
 namespace
 {
 
-struct Data
+struct PodAdapter
 {
     std::string_view name;
     std::uint16_t y;
@@ -19,9 +20,9 @@ struct Data
 } // namespace
 
 
-void serialize(std::ofstream& stream, const Entry& entry)
+void serialize(std::ostream& stream, const Entry& entry)
 {
-    Data data;
+    PodAdapter data;
 
     data.name = entry.name.c_str();
     data.y = static_cast<int>(entry.dueDate.getDate().year());
@@ -33,16 +34,12 @@ void serialize(std::ofstream& stream, const Entry& entry)
     stream.write(reinterpret_cast<const char*>(&data), sizeof(data));
 }
 
-template<class T> void ignore( const T& ) { };
-
-Entry deserialize(std::ifstream& stream)
+Entry deserialize(std::istream& stream)
 {
-    using namespace std::chrono;
-
-    Data* data;
-    auto str = new char[sizeof(Data)];
-    stream.read(str, sizeof(Data));
-    data = reinterpret_cast<Data*>(str);
+    PodAdapter* data;
+    auto str = new char[sizeof(PodAdapter)];
+    stream.read(str, sizeof(PodAdapter));
+    data = reinterpret_cast<PodAdapter*>(str);
 
     return {
             .name = std::string{data->name},
@@ -53,4 +50,3 @@ Entry deserialize(std::ifstream& stream)
 }
 
 } // namespace planner
-

@@ -11,4 +11,4 @@ public:
     static void Print(const std::vector<Entry>& entries);
 };
 
-} // namespace planner
+}  // namespace planner

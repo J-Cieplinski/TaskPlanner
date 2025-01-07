@@ -1,5 +1,6 @@
-#include <Entry.hpp>
 #include <ConsolePrinter.hpp>
+#include <Entry.hpp>
+#include <Serialization.hpp>
 
 #include <cxxopts.hpp>
 #include <iostream>
@@ -25,7 +26,7 @@ int main()
     planner::ConsolePrinter::Print({entry, entry1});
 
     std::ofstream file("test.bin", std::ios::out | std::ios::binary);
-    if(!file.is_open())
+    if (!file.is_open())
     {
         throw std::runtime_error("File not opened");
     }
@@ -33,7 +34,6 @@ int main()
     planner::serialize(file, entry);
 
     file.close();
-
 
     std::ifstream fileI("test.bin", std::ios::in | std::ios::binary);
     planner::ConsolePrinter::Print({planner::deserialize(fileI)});

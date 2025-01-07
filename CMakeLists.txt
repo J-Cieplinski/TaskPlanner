@@ -68,11 +68,12 @@ target_sources(${PROJECT_NAME}
     ${CMAKE_CURRENT_SOURCE_DIR}/include/Entry.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/include/Sorters.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/include/Time.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Utility.hpp
   PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/source/ConsolePrinter.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/source/Date.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/source/Entry.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/source/Time.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/source/Serialization.cpp
 )
 # cmake-format: on
 
