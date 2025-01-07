@@ -33,6 +33,7 @@ target_sources(${PROJECT_NAME}
   PUBLIC
   PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/source/Date.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/source/Serialization.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/source/Sorters.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/source/Time.cpp
 )

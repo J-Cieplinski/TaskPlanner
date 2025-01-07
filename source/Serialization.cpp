@@ -1,6 +1,8 @@
 #include <Entry.hpp>
 #include <Serialization.hpp>
 
+#include <algorithm>
+
 namespace planner
 {
 
@@ -34,19 +36,24 @@ void serialize(std::ostream& stream, const Entry& entry)
     stream.write(reinterpret_cast<const char*>(&data), sizeof(data));
 }
 
-Entry deserialize(std::istream& stream)
+void serialize(std::ostream& stream, std::span<Entry> entries)
 {
-    PodAdapter* data;
-    auto str = new char[sizeof(PodAdapter)];
-    stream.read(str, sizeof(PodAdapter));
-    data = reinterpret_cast<PodAdapter*>(str);
+    std::ranges::for_each(entries, [&stream](const Entry& entry) {
+        serialize(stream, entry);
+    });
+}
 
-    return {
-            .name = std::string{data->name},
-            .dueDate = Date{data->y, data->m, data->d},
-            .duration = Time{data->duration},
-            .priority = data->priority
-        };
+std::vector<Entry> deserialize(std::istream& stream)
+{
+    PodAdapter data;
+    std::vector<Entry> entries;
+
+    while(not stream.read(reinterpret_cast<char*>(&data), sizeof(PodAdapter)).eof())
+    {
+        entries.emplace_back(std::string{data.name}, Date{data.y, data.m, data.d}, Time{data.duration}, data.priority);
+    }
+
+    return entries;
 }
 
 } // namespace planner

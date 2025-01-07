@@ -23,7 +23,9 @@ int main()
         .priority = planner::Priority::LOW,
     };
 
-    planner::ConsolePrinter::Print({entry, entry1});
+    std::vector entries{entry, entry1};
+
+    planner::ConsolePrinter::Print(entries);
 
     std::ofstream file("test.bin", std::ios::out | std::ios::binary);
     if (!file.is_open())
@@ -36,7 +38,8 @@ int main()
     file.close();
 
     std::ifstream fileI("test.bin", std::ios::in | std::ios::binary);
-    planner::ConsolePrinter::Print({planner::deserialize(fileI)});
+    auto deserializedEntries = planner::deserialize(fileI);
+    planner::ConsolePrinter::Print(deserializedEntries);
 
     return 0;
 }

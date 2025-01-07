@@ -8,7 +8,7 @@ namespace planner
 class ConsolePrinter
 {
 public:
-    static void Print(const std::vector<Entry>& entries);
+    static void Print(std::span<Entry> entries);
 };
 
 }  // namespace planner
