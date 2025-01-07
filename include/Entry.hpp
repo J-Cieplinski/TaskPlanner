@@ -6,6 +6,7 @@
 #include <fmt/format.h>
 #include <fmt/ostream.h>
 #include <string>
+#include <fstream>
 
 namespace planner
 {
@@ -52,6 +53,9 @@ struct Entry
     Time duration;
     Priority priority;
 };
+
+void serialize(std::ofstream& stream, const Entry& entry);
+Entry deserialize(std::ifstream& stream);
 
 inline bool operator==(const Entry& left, const Entry& right)
 {

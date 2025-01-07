@@ -71,6 +71,7 @@ target_sources(${PROJECT_NAME}
   PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/source/ConsolePrinter.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/source/Date.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/source/Entry.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/source/Time.cpp
 )
 # cmake-format: on

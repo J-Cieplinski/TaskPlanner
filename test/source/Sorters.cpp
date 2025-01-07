@@ -23,7 +23,7 @@ const planner::Entry entry1{
 };
 
 const planner::Entry entry2{
-    .name = "TEST 2",
+    .name = "TEST 3",
     .dueDate = planner::Date{"2025-12-02"},
     .duration = planner::Time("02:41:41"),
     .priority = planner::Priority::LOW,
@@ -57,6 +57,19 @@ TEST(SortByField, ShouldProperlySortByPriority)
     const std::vector EXPECTED_ENTRIES {entry, entry1, entry2};
 
     SortByField<&Entry::priority>(entries);
+
+    EXPECT_EQ(entries, EXPECTED_ENTRIES);
+}
+
+TEST(CustomSort, ShouldProperlySortWithCustomSorter)
+{
+    std::vector entries {entry1, entry2, entry};
+    const std::vector EXPECTED_ENTRIES {entry2, entry1, entry};
+    auto pred = [](const Entry& left, const Entry& right) -> bool {
+        return left.duration < right.duration;
+    };
+
+    CustomSort(entries, pred);
 
     EXPECT_EQ(entries, EXPECTED_ENTRIES);
 }

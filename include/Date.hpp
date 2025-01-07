@@ -15,6 +15,7 @@ class Date
 public:
     Date(std::string_view date);
     Date(const year_month_day& date);
+    Date(std::uint16_t y, std::uint16_t m, std::uint16_t d);
 
     year_month_day getDate() const;
 

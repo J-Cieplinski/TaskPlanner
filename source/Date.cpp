@@ -21,6 +21,11 @@ Date::Date(const year_month_day& date)
 {
 }
 
+Date::Date(std::uint16_t y, std::uint16_t m, std::uint16_t d)
+    : date_{std::chrono::year{y}, std::chrono::month{m}, std::chrono::day{d}}
+{
+}
+
 Date::year_month_day Date::getDate() const
 {
     return date_;
