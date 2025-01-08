@@ -7,9 +7,9 @@
 namespace planner
 {
 
-enum class Priority : std::uint8_t
+enum class Priority
 {
-    LOW,
+    LOW = 1,
     NORMAL,
     HIGH
 };

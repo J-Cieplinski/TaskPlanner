@@ -1,6 +1,4 @@
-#include <ConsolePrinter.hpp>
-#include <Entry.hpp>
-#include <Serialization.hpp>
+#include <App.hpp>
 
 #include <cxxopts.hpp>
 #include <iostream>
@@ -9,27 +7,8 @@
 
 int main()
 {
-    planner::Entry entry{
-        .name = "TEST",
-        .dueDate = planner::Date{"2024-12-01"},
-        .duration = planner::Time("23"),
-        .priority = planner::Priority::HIGH,
-    };
-
-    planner::Entry entry1{
-        .name = "TEST 2",
-        .dueDate = planner::Date{"2025-12-01"},
-        .duration = planner::Time("2:4:4"),
-        .priority = planner::Priority::LOW,
-    };
-
-    std::vector entries{entry, entry1};
-
-    planner::ConsolePrinter::Print(entries);
-
-    std::ifstream fileI("test.bin", std::ios::in | std::ios::binary);
-    auto deserializedEntries = planner::deserialize(fileI);
-    planner::ConsolePrinter::Print(deserializedEntries);
+    planner::App app;
+    app.run();
 
     return 0;
 }
