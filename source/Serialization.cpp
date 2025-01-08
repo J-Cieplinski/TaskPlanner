@@ -11,10 +11,10 @@ namespace
 
 struct PodAdapter
 {
-    std::uint16_t y;
-    std::uint16_t m;
-    std::uint16_t d;
-    std::uint32_t duration;
+    std::int32_t y;
+    std::uint32_t m;
+    std::uint32_t d;
+    std::int64_t duration;
     Priority priority;
 };
 
@@ -55,7 +55,7 @@ std::vector<Entry> deserialize(std::istream& stream)
         name.resize(strLen);
         stream.read(reinterpret_cast<char*>(&name.front()), strLen);
 
-        entries.emplace_back(std::string{name}, Date{data.y, data.m, data.d}, Time{data.duration},
+        entries.emplace_back(name, Date{data.y, data.m, data.d}, Time{data.duration},
                              data.priority);
     }
 

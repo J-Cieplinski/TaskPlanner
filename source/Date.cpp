@@ -5,14 +5,13 @@
 namespace planner
 {
 
-Date::Date(std::string_view date)
+Date::Date(const std::string& date)
 {
-    std::string dateStr{date};
-    std::stringstream ss(dateStr);
+    std::stringstream ss(date);
 
     if (not std::chrono::from_stream(ss, "%F", date_))
     {
-        throw std::runtime_error(dateStr + " is not a valid date format");
+        throw std::runtime_error(date + " is not a valid date format");
     }
 }
 
@@ -21,7 +20,7 @@ Date::Date(const year_month_day& date)
 {
 }
 
-Date::Date(std::uint16_t y, std::uint16_t m, std::uint16_t d)
+Date::Date(std::int32_t y, std::uint32_t m, std::uint32_t d)
     : date_{std::chrono::year{y}, std::chrono::month{m}, std::chrono::day{d}}
 {
 }

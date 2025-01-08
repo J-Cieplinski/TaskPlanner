@@ -1,6 +1,5 @@
 #include <ConsoleUI.hpp>
 
-#include <ranges>
 #include <iostream>
 
 #include <fmt/printf.h>
@@ -33,18 +32,18 @@ void ConsoleUI::ShowOptions()
 
 void ConsoleUI::ClearConsole()
 {
-    #if defined _WIN32
-        system("cls");
-    #elif defined (__LINUX__) || defined(__gnu_linux__) || defined(__linux__)
-        system("clear");
-    #elif defined (__APPLE__)
-        system("clear");
-    #endif
+#if defined _WIN32
+    system("cls");
+#elif defined(__LINUX__) || defined(__gnu_linux__) || defined(__linux__)
+    system("clear");
+#elif defined(__APPLE__)
+    system("clear");
+#endif
 }
 
 int ConsoleUI::GetSelection()
 {
-    int choice {0};
+    int choice{0};
     std::cin >> choice;
     return choice;
 }
@@ -76,17 +75,18 @@ std::optional<Entry> ConsoleUI::FillEntry()
     fmt::print("Priority:\n1.{}\n2.{}\n3.{}\n", Priority::LOW, Priority::NORMAL, Priority::HIGH);
     std::cin >> priority;
 
-    try {
-        Entry entry {
+    try
+    {
+        Entry entry{
             .name = std::move(name),
             .dueDate = Date{dueDate},
             .duration = Time{duration},
-            .priority = static_cast<Priority>(priority)
+            .priority = static_cast<Priority>(priority),
         };
 
         return entry;
     }
-    catch(std::exception& e)
+    catch (std::exception& e)
     {
         fmt::print("Unable to construct entry with msg: {}\n", e.what());
     }

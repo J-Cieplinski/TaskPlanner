@@ -3,7 +3,7 @@
 #include <fmt/ostream.h>
 
 #include <chrono>
-#include <string_view>
+#include <string>
 
 namespace planner
 {
@@ -13,9 +13,9 @@ class Date
     using year_month_day = std::chrono::year_month_day;
 
 public:
-    Date(std::string_view date);
+    Date(const std::string& date);
     Date(const year_month_day& date);
-    Date(std::uint16_t y, std::uint16_t m, std::uint16_t d);
+    Date(std::int32_t y, std::uint32_t m, std::uint32_t d);
 
     year_month_day getDate() const;
 

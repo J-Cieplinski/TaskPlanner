@@ -3,7 +3,7 @@
 namespace planner
 {
 
-Time::Time(std::uint32_t time)
+Time::Time(std::int64_t time)
     : time_{std::chrono::seconds{time}}
 {
 }

@@ -9,7 +9,7 @@
 namespace planner
 {
 
-class Entry;
+struct Entry;
 
 void serialize(std::ostream& stream, const Entry& entry);
 void serialize(std::ostream& stream, std::span<Entry> entry);

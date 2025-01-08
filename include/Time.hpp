@@ -14,7 +14,7 @@ class Time
     using hh_mm_ss = std::chrono::hh_mm_ss<std::chrono::seconds>;
 
 public:
-    Time(std::uint32_t time);
+    Time(std::int64_t time);
     Time(hh_mm_ss time);
     Time(std::string_view time);
 

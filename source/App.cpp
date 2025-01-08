@@ -20,15 +20,14 @@ enum Options
     EXIT
 };
 
-} // namespace
-
+}  // namespace
 
 void App::run()
 {
-    bool shouldRefresh {true};
-    while(true)
+    bool shouldRefresh{true};
+    while (true)
     {
-        if(shouldRefresh)
+        if (shouldRefresh)
         {
             ConsoleUI::ClearConsole();
             ConsoleUI::PrintEntries(entries_);
@@ -37,14 +36,14 @@ void App::run()
             shouldRefresh = false;
         }
 
-        if(auto option = ConsoleUI::GetSelection())
+        if (auto option = ConsoleUI::GetSelection())
         {
-            switch(option)
+            switch (option)
             {
                 case Options::ADD:
                 {
                     auto entry = ConsoleUI::FillEntry();
-                    if(entry)
+                    if (entry)
                     {
                         entries_.emplace_back(std::move(*entry));
                     }
@@ -82,7 +81,7 @@ void App::run()
 void App::loadEntries(const std::filesystem::path& path)
 {
     std::ifstream file(path);
-    if(not file.is_open())
+    if (not file.is_open())
     {
         fmt::print("Invalid path {}", path.string());
         return;
@@ -94,7 +93,7 @@ void App::loadEntries(const std::filesystem::path& path)
 void App::saveEntries(const std::filesystem::path& path)
 {
     std::ofstream file(path);
-    if(not file.is_open())
+    if (not file.is_open())
     {
         fmt::print("Invalid path {}", path.string());
         return;
@@ -103,4 +102,4 @@ void App::saveEntries(const std::filesystem::path& path)
     serialize(file, entries_);
 }
 
-} // namespace planner
+}  // namespace planner

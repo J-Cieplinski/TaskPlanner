@@ -69,7 +69,7 @@ target_sources(${PROJECT_NAME}
     ${CMAKE_CURRENT_SOURCE_DIR}/include/Entry.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/include/Sorters.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/include/Time.hpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Utility.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Priority.hpp
   PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/source/App.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/source/ConsoleUI.cpp

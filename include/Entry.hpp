@@ -1,8 +1,8 @@
 #pragma once
 
 #include <Date.hpp>
+#include <Priority.hpp>
 #include <Time.hpp>
-#include <Utility.hpp>
 
 #include <fmt/format.h>
 #include <fmt/ostream.h>

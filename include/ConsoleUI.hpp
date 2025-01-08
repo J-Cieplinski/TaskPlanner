@@ -4,6 +4,7 @@
 
 #include <filesystem>
 #include <optional>
+#include <span>
 
 namespace planner
 {
@@ -15,8 +16,8 @@ public:
     static void ShowOptions();
     static void ClearConsole();
     static int GetSelection();
-    static std::filesystem::path GetPath(); 
-    static std::optional<Entry> FillEntry(); 
+    static std::filesystem::path GetPath();
+    static std::optional<Entry> FillEntry();
 };
 
 }  // namespace planner
