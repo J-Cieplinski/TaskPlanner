@@ -32,7 +32,7 @@ void serialize(std::ostream& stream, const Entry& entry)
 
     stream.write(reinterpret_cast<const char*>(&data), sizeof(data));
 
-    std::uint16_t strLen = entry.name.length();
+    auto strLen = entry.name.length();
     stream.write(reinterpret_cast<const char*>(&strLen), sizeof(strLen));
     stream.write(reinterpret_cast<const char*>(&entry.name.front()), strLen);
 }
@@ -49,7 +49,7 @@ std::vector<Entry> deserialize(std::istream& stream)
 
     while (not stream.read(reinterpret_cast<char*>(&data), sizeof(PodAdapter)).eof())
     {
-        std::uint16_t strLen{0};
+        std::size_t strLen{0};
         std::string name{};
         stream.read(reinterpret_cast<char*>(&strLen), sizeof(strLen));
         name.resize(strLen);

@@ -18,6 +18,7 @@ public:
     static int GetSelection();
     static std::filesystem::path GetPath();
     static std::optional<Entry> FillEntry();
+    static std::optional<Entry> GetEntryForRemoval(std::span<Entry> entries);
 };
 
 }  // namespace planner

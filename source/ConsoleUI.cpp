@@ -22,12 +22,8 @@ void ConsoleUI::PrintEntries(std::span<Entry> entries)
 
 void ConsoleUI::ShowOptions()
 {
-    fmt::print("1. Add Entry\n");
-    fmt::print("2. Remove Entry\n");
-    fmt::print("3. Save to file\n");
-    fmt::print("4. Load from file\n");
-    fmt::print("5. Sort\n");
-    fmt::print("6. Exit\n");
+    fmt::print("1. {}\n2. {}\n3. {}\n4. {}\n5. {}\n6. {}\n", "Add Entry", "Remove Entry",
+               "Save to file", "Load from file", "Sort", "Exit");
 }
 
 void ConsoleUI::ClearConsole()
@@ -92,6 +88,19 @@ std::optional<Entry> ConsoleUI::FillEntry()
     }
 
     return std::nullopt;
+}
+
+std::optional<Entry> ConsoleUI::GetEntryForRemoval(std::span<Entry> entries)
+{
+    std::string name;
+    fmt::print("Enter name of entry for removal: ");
+    std::cin.clear();
+    std::getline(std::cin >> std::ws, name);
+
+    auto it
+        = std::ranges::find_if(entries, [&name](const Entry& entry) { return entry.name == name; });
+
+    return it != entries.end() ? std::optional{*it} : std::nullopt;
 }
 
 }  // namespace planner

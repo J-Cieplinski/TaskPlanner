@@ -42,10 +42,17 @@ void App::run()
             {
                 case Options::ADD:
                 {
-                    auto entry = ConsoleUI::FillEntry();
-                    if (entry)
+                    if (auto entry = ConsoleUI::FillEntry())
                     {
                         entries_.emplace_back(std::move(*entry));
+                    }
+                    break;
+                }
+                case Options::REMOVE:
+                {
+                    if (auto entry = ConsoleUI::GetEntryForRemoval(entries_))
+                    {
+                        std::erase(entries_, *entry);
                     }
                     break;
                 }
