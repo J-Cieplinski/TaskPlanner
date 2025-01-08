@@ -11,7 +11,6 @@ namespace
 
 struct PodAdapter
 {
-    std::string_view name;
     std::uint16_t y;
     std::uint16_t m;
     std::uint16_t d;
@@ -25,7 +24,6 @@ void serialize(std::ostream& stream, const Entry& entry)
 {
     PodAdapter data;
 
-    data.name = entry.name.c_str();
     data.y = static_cast<int>(entry.dueDate.getDate().year());
     data.m = static_cast<unsigned int>(entry.dueDate.getDate().month());
     data.d = static_cast<unsigned int>(entry.dueDate.getDate().day());
@@ -33,6 +31,10 @@ void serialize(std::ostream& stream, const Entry& entry)
     data.priority = entry.priority;
 
     stream.write(reinterpret_cast<const char*>(&data), sizeof(data));
+
+    std::uint16_t strLen = entry.name.length();
+    stream.write(reinterpret_cast<const char*>(&strLen), sizeof(strLen));
+    stream.write(reinterpret_cast<const char*>(&entry.name.front()), strLen);
 }
 
 void serialize(std::ostream& stream, std::span<Entry> entries)
@@ -47,8 +49,14 @@ std::vector<Entry> deserialize(std::istream& stream)
 
     while (not stream.read(reinterpret_cast<char*>(&data), sizeof(PodAdapter)).eof())
     {
-        entries.emplace_back(std::string{data.name}, Date{data.y, data.m, data.d},
-                             Time{data.duration}, data.priority);
+        std::uint16_t strLen{0};
+        std::string name{};
+        stream.read(reinterpret_cast<char*>(&strLen), sizeof(strLen));
+        name.resize(strLen);
+        stream.read(reinterpret_cast<char*>(&name.front()), strLen);
+
+        entries.emplace_back(std::string{name}, Date{data.y, data.m, data.d}, Time{data.duration},
+                             data.priority);
     }
 
     return entries;

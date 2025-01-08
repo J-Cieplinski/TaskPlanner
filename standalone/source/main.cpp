@@ -27,16 +27,6 @@ int main()
 
     planner::ConsolePrinter::Print(entries);
 
-    std::ofstream file("test.bin", std::ios::out | std::ios::binary);
-    if (!file.is_open())
-    {
-        throw std::runtime_error("File not opened");
-    }
-
-    planner::serialize(file, entry);
-
-    file.close();
-
     std::ifstream fileI("test.bin", std::ios::in | std::ios::binary);
     auto deserializedEntries = planner::deserialize(fileI);
     planner::ConsolePrinter::Print(deserializedEntries);
