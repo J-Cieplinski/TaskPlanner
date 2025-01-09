@@ -90,7 +90,8 @@ void App::loadEntries(const std::filesystem::path& path)
     std::ifstream file(path);
     if (not file.is_open())
     {
-        fmt::print("Invalid path {}", path.string());
+        // TODO: replace with logger
+        ConsoleUI::WriteToLog("Invalid path \"{}\"", path.string());
         return;
     }
 
@@ -102,7 +103,8 @@ void App::saveEntries(const std::filesystem::path& path)
     std::ofstream file(path);
     if (not file.is_open())
     {
-        fmt::print("Invalid path {}", path.string());
+        // TODO: replace with logger
+        ConsoleUI::WriteToLog("Invalid path \"{}\"", path.string());
         return;
     }
 

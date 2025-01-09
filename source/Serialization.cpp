@@ -52,11 +52,27 @@ std::vector<Entry> deserialize(std::istream& stream)
         std::size_t strLen{0};
         std::string name{};
         stream.read(reinterpret_cast<char*>(&strLen), sizeof(strLen));
-        name.resize(strLen);
+
+        try
+        {
+            name.resize(strLen);
+        }
+        catch (std::exception&)
+        {
+            return {};
+        }
+
         stream.read(reinterpret_cast<char*>(&name.front()), strLen);
 
-        entries.emplace_back(name, Date{data.y, data.m, data.d}, Time{data.duration},
-                             data.priority);
+        try
+        {
+            entries.emplace_back(name, Date{data.y, data.m, data.d}, Time{data.duration},
+                                 data.priority);
+        }
+        catch (std::exception&)
+        {
+            return {};
+        }
     }
 
     return entries;

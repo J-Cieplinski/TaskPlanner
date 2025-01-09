@@ -7,6 +7,10 @@
 namespace planner
 {
 
+const std::filesystem::path LOG_FILE_PATH{"debug.log"};
+fmt::ostream LOG_FILE = fmt::output_file(LOG_FILE_PATH.string(),
+                                         fmt::file::WRONLY | fmt::file::CREATE | fmt::file::APPEND);
+
 void ConsoleUI::PrintEntries(std::span<Entry> entries)
 {
     fmt::print("{:_^21}{:_^21}{:_^21}{:_^22}\n", "_", "_", "_", "_");
@@ -84,7 +88,8 @@ std::optional<Entry> ConsoleUI::FillEntry()
     }
     catch (std::exception& e)
     {
-        fmt::print("Unable to construct entry with msg: {}\n", e.what());
+        LOG_FILE.print("Unable to construct entry: \"{}\"\n", e.what());
+        LOG_FILE.flush();
     }
 
     return std::nullopt;
