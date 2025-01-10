@@ -16,11 +16,8 @@ CPMAddPackage(NAME TaskPlanner SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
 
 add_executable(${PROJECT_NAME})
 
-target_sources(${PROJECT_NAME}
-  PRIVATE
-  ${CMAKE_CURRENT_SOURCE_DIR}/source/main.cpp
-)
+target_sources(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/source/main.cpp)
 
-set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 20 OUTPUT_NAME "TaskPlanner")
+set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 20 OUTPUT_NAME "TaskPlannerApp")
 
 target_link_libraries(${PROJECT_NAME} TaskPlanner::TaskPlanner)

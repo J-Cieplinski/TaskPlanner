@@ -3,6 +3,7 @@
 #include <Entry.hpp>
 
 #include <algorithm>
+#include <limits>
 
 #include <gtest/gtest.h>
 
@@ -60,6 +61,32 @@ TEST(SerializeDeserialize, ShouldSerializeAndDeserializeCorrectlyASeriesOfEntrie
 TEST(Deserialize, ShouldDoNothingOnEmptyStream)
 {
     std::stringstream ss;
+
+    EXPECT_TRUE(deserialize(ss).empty());
+}
+
+TEST(Deserialize, ShouldReturnEmptyVectorOnIncorrectNameLengthSerialization)
+{
+    struct PodAdapter
+    {
+        std::int32_t y;
+        std::uint32_t m;
+        std::uint32_t d;
+        std::int64_t duration;
+        Priority priority;
+    } data;
+
+    data.y = 5;
+    data.m = 6;
+    data.d = 12;
+    data.duration = 25;
+    data.priority = Priority::HIGH;
+
+    std::stringstream ss;
+    ss.write(reinterpret_cast<const char*>(&data), sizeof(data));
+
+    const size_t TOO_HIGH_STR_LEN = std::numeric_limits<size_t>::max();
+    ss.write(reinterpret_cast<const char*>(&TOO_HIGH_STR_LEN), sizeof(TOO_HIGH_STR_LEN));
 
     EXPECT_TRUE(deserialize(ss).empty());
 }

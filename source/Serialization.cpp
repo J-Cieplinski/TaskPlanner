@@ -64,15 +64,8 @@ std::vector<Entry> deserialize(std::istream& stream)
 
         stream.read(reinterpret_cast<char*>(&name.front()), strLen);
 
-        try
-        {
-            entries.emplace_back(name, Date{data.y, data.m, data.d}, Time{data.duration},
-                                 data.priority);
-        }
-        catch (std::exception&)
-        {
-            return {};
-        }
+        entries.emplace_back(name, Date{data.y, data.m, data.d}, Time{data.duration},
+                             data.priority);
     }
 
     return entries;

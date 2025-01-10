@@ -8,25 +8,25 @@ namespace planner
 namespace
 {
 
-const planner::Entry entry{
+const Entry entry{
     .name = "TEST",
-    .dueDate = planner::Date{"2024-12-01"},
-    .duration = planner::Time("23:00:00"),
-    .priority = planner::Priority::HIGH,
+    .dueDate = Date{"2024-12-01"},
+    .duration = Time("23:00:00"),
+    .priority = Priority::HIGH,
 };
 
-const planner::Entry entry1{
+const Entry entry1{
     .name = "TEST 2",
-    .dueDate = planner::Date{"2025-12-01"},
-    .duration = planner::Time("02:41:45"),
-    .priority = planner::Priority::NORMAL,
+    .dueDate = Date{"2025-12-01"},
+    .duration = Time("02:41:45"),
+    .priority = Priority::NORMAL,
 };
 
-const planner::Entry entry2{
+const Entry entry2{
     .name = "TEST 3",
-    .dueDate = planner::Date{"2025-12-02"},
-    .duration = planner::Time("02:41:41"),
-    .priority = planner::Priority::LOW,
+    .dueDate = Date{"2025-12-02"},
+    .duration = Time("02:41:41"),
+    .priority = Priority::LOW,
 };
 
 }  // namespace

@@ -1,22 +1,25 @@
 #pragma once
 
+#include <cstdint>
+
 #include <fmt/format.h>
 #include <fmt/ostream.h>
-#include <cstdint>
 
 namespace planner
 {
 
 enum class Priority
 {
-    LOW = 1,
+    HIGH = 1,
     NORMAL,
-    HIGH
+    LOW
 };
 
 inline bool operator<(Priority left, Priority right)
 {
-    return static_cast<std::uint8_t>(left) > static_cast<std::uint8_t>(right);
+    // While not being logical that HIGH < LOW it helps with sorting
+    // so HIGH takes precedence over LOW when sorting by less
+    return static_cast<std::uint8_t>(left) < static_cast<std::uint8_t>(right);
 }
 
 inline std::ostream& operator<<(std::ostream& os, Priority priority)
