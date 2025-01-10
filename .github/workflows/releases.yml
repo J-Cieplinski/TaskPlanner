@@ -1,0 +1,35 @@
+name: Releases
+
+on: 
+  push:
+    tags:
+    - v*
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+      - name: switch to gcc-14 on linux
+        run: |
+          sudo add-apt-repository universe
+          sudo apt-get update
+          sudo apt-get install gcc-14 g++-14
+          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 100 --slave /usr/bin/g++ g++ /usr/bin/g++-14 --slave /usr/bin/gcov gcov /usr/bin/gcov-14
+          sudo update-alternatives --set gcc /usr/bin/gcc-14
+    
+      - uses: actions/cache@v3
+        with:
+          path: "**/cpm_modules"
+          key: ${{ github.workflow }}-cpm-modules-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
+      - name: configure
+        run: cmake -Sstandalone -Bbuild -DCMAKE_BUILD_TYPE=Debug
+  
+      - name: build
+        run: cmake --build build -j4
+
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: "./build/TaskPlannerApp*"
