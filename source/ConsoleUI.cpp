@@ -70,9 +70,9 @@ std::optional<Entry> ConsoleUI::FillEntry()
 
     fmt::print("Due date in YYYY-MM-DD format: ");
     std::cin >> dueDate;
-    fmt::print("Duration: ");
+    fmt::print("Duration in HH:MM:SS format: ");
     std::cin >> duration;
-    fmt::print("Priority:\n1.{}\n2.{}\n3.{}\n", Priority::LOW, Priority::NORMAL, Priority::HIGH);
+    fmt::print("Priority:\n1.{}\n2.{}\n3.{}\n", Priority::HIGH, Priority::NORMAL, Priority::LOW);
     std::cin >> priority;
 
     try

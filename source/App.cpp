@@ -25,7 +25,8 @@ enum Options
 void App::run()
 {
     bool shouldRefresh{true};
-    while (true)
+    constexpr bool running{true};
+    while (running)
     {
         if (shouldRefresh)
         {
