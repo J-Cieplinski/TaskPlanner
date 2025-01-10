@@ -33,13 +33,6 @@ CPMAddPackage(
   OPTIONS "FMT_INSTALL YES" # create an installable target
 )
 
-CPMAddPackage(
-  NAME json
-  GITHUB_REPOSITORY nlohmann/json
-  VERSION 3.11.3
-  OPTIONS "JSON_Install ON"
-)
-
 # ---- Create library ----
 
 # Note: for header-only libraries change all PUBLIC flags to INTERFACE and create an interface
@@ -51,7 +44,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 20)
 target_compile_options(${PROJECT_NAME} PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive->")
 
 # Link dependencies
-target_link_libraries(${PROJECT_NAME} PUBLIC fmt::fmt nlohmann_json::nlohmann_json)
+target_link_libraries(${PROJECT_NAME} PUBLIC fmt::fmt)
 
 target_include_directories(
   ${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
@@ -95,5 +88,5 @@ packageProject(
   INCLUDE_DESTINATION include/${PROJECT_NAME}-${PROJECT_VERSION}
   VERSION_HEADER "${VERSION_HEADER_LOCATION}"
   COMPATIBILITY SameMajorVersion
-  DEPENDENCIES "fmt 10.2.1;nlohmann_json 3.11.3"
+  DEPENDENCIES "fmt 10.2.1;"
 )
